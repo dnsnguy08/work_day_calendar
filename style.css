@@ -74,6 +74,10 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
+.button-color {
+  color: #000000;
+}
+
 .hour-passed {
   background-color: rgb(197, 197, 197);
 }

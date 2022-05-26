@@ -10,7 +10,7 @@ function addTimeBlocks () {
     for (let i = 0; i < workdayHours.length; i++) {
         let timeTag = '<div class="input-group-prepend"><span class="input-group-text bg-light" id="inputGroup-sizing-lg">' + workdayHours[i] + '</span></div>';
         let inputText = "<input type='text' class='form-control events' placeholder='Todo' aria-label='todo' aria-describedby='button-addon2'>";
-        let saveButton = '<div class="input-group-append"><button class="btn btn-outline-secondary bg-success" type="button" id="button-addon2">Button</button></div>';
+        let saveButton = '<div class="input-group-append"><button class="btn btn-outline-secondary bg-info button-color" type="button" id="button-addon2">Save</button></div>';
         let hourBlock = '<div class="input-group input-group-lg d-flex bd-highlight bg-gradient-info">' + timeTag + inputText + saveButton + '</div>';
         
         calendarContainer.append(hourBlock);
@@ -32,20 +32,15 @@ function colorEvents() {
 
         let timeString = hourTag[i].innerHTML.split(" ");
         let currentTimeStr = currentTime.split(" ");
-        if ((parseFloat(currentTimeStr[0]) > parseInt(timeString[0])) && (currentTimeStr[1] === timeString[1])) {
-
-        updateBlock.eq(i).addClass('current-hour');
+        let currentHour = currentTimeStr[0].split(".");
+        // console.log(currentHour[0]);
+        if ((parseFloat(currentTimeStr[0]) > parseInt(timeString[0])) && (currentTimeStr[1] === timeString[1]) && (parseInt(currentHour[0]) === parseInt(timeString[0]))) {
+            updateBlock.eq(i).addClass('current-hour');
+        } else if (parseFloat(currentTimeStr[0]) > parseInt(timeString[0]) && (currentTimeStr[1] === timeString[1]) && (parseInt(currentHour[0]) != parseInt(timeString[0]))) {
+            updateBlock.eq(i).addClass('hour-passed');
+        } else {
+            updateBlock.eq(i).addClass('future-hour');
         }
-        // if ((parseFloat(currentTimeStr[0]) > parseInt(timeString[0])) && (currentTimeStr[1] === timeString[1])) {
-        //     updateBlock[i].addClass('current-hour');
-        // }
-        // // console.log(hourTag[i].textContent);
-        // else if (parseFloat(currentTimeStr[0]) > parseInt(timeString[0])){
-        //     updateBlock[i].addClass('hour-passed');
-        // } else {
-        //     updateBlock[i].addClass('future-hour');
-        // }
-
     }
 }
 colorEvents();
