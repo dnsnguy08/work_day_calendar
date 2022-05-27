@@ -44,21 +44,22 @@ function colorEvents() {
         let currentHour = parseInt(currentHrStr[0]); // The hour of the current time as an int
         
         // Add class styling to event block depending on past, present, future time
-        if (currentHour >= 1 && (currentTime > eventTime) && (currentTimeStr[1] === timeString[1]) && (currentHour === eventTime)) {
+        if (currentTime > eventTime && currentHour === eventTime && currentTimeStr[1] === timeString[1]) {
             updateBlock.eq(i).addClass('current-hour');
             updateBlock.eq(i).attr("placeholder", "Current Hour");
-        } else if (currentHour >= 1 && eventTime === 12 && currentTimeStr[1] === timeString[1]) {
+        } else if (currentTime > eventTime && currentHour === 12 && currentTimeStr[1] === 'PM' && timeString[1] === 'AM') {
             updateBlock.eq(i).addClass('hour-passed');
             updateBlock.eq(i).attr("placeholder", "Event has already happened");
-        } else if (currentHour < eventTime && (currentTimeStr[1] === timeString[1])) {
+        } else if (currentHour === 12 && currentTime > eventTime && currentTimeStr[1] === 'PM' && timeString[1] === 'PM') {
             updateBlock.eq(i).addClass('future-hour');
-        } else if (currentHour < eventTime && eventTime === 12 && (currentTimeStr[1] != timeString[1])) {
-            updateBlock.eq(i).addClass('future-hour');
-        } else if (currentHour > eventTime && (currentTimeStr[1] != timeString[1])) {
-            updateBlock.eq(i).addClass('future-hour');
-        } else {
+        } else if (currentHour < eventTime && eventTime === 12 && currentTimeStr[1] === 'PM' && timeString[1] === 'PM') {
             updateBlock.eq(i).addClass('hour-passed');
             updateBlock.eq(i).attr("placeholder", "Event has already happened");
+        } else if (currentHour < eventTime && currentTimeStr[1] === 'PM' && timeString[1] === 'AM') {
+            updateBlock.eq(i).addClass('hour-passed');
+            updateBlock.eq(i).attr("placeholder", "Event has already happened");
+        } else if (currentHour < eventTime && currentTimeStr[1] === 'PM' && timeString[1] === 'PM') {
+            updateBlock.eq(i).addClass('future-hour');
         }
     }
 }
