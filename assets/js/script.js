@@ -13,7 +13,7 @@ function addTimeBlocks () {
     
     // Add hourBlock divs to the page based off of the workdayHours array
     for (let i = 0; i < workdayHours.length; i++) {
-        let timeTag = '<div class="input-group-prepend"><span class="input-group-text bg-light" id="inputGroup-sizing-lg">' + workdayHours[i] + '</span></div>';
+        let timeTag = '<div class="input-group-prepend"><span class="input-group-text bg-light">' + workdayHours[i] + '</span></div>';
         let inputText = "<textarea type='text' class='form-control events' id='w" + workdayHours[i] + "' placeholder='' aria-label='todo' aria-describedby='button-addon2'/>";
         let saveButton = '<div class="input-group-append"><button class="btn btn-outline-secondary bg-info button-color" type="button" id="button-addon2">Save</button></div>';
         let hourBlock = '<div class="input-group input-group-lg d-flex bd-highlight bg-gradient-info">' + timeTag + inputText + saveButton + '</div>';
@@ -52,6 +52,10 @@ function colorEvents() {
             updateBlock.eq(i).attr("placeholder", "Event has already happened");
         } else if (currentHour < eventTime && (currentTimeStr[1] === timeString[1])) {
             updateBlock.eq(i).addClass('future-hour');
+        } else if (currentHour < eventTime && eventTime === 12 && (currentTimeStr[1] != timeString[1])) {
+            updateBlock.eq(i).addClass('future-hour');
+        } else if (currentHour > eventTime && (currentTimeStr[1] != timeString[1])) {
+            updateBlock.eq(i).addClass('future-hour');
         } else {
             updateBlock.eq(i).addClass('hour-passed');
             updateBlock.eq(i).attr("placeholder", "Event has already happened");
@@ -63,8 +67,6 @@ colorEvents();
 
 // Function for grabbing all values in localStorage and assigning to element IDs
 function init() {
-    console.log(localStorage.getItem("w7-AM"));
-
     $("#w7-AM").val(JSON.parse(localStorage.getItem("w7-AM")));
 
     $("#w8-AM").val(JSON.parse(localStorage.getItem("w8-AM")));
@@ -101,7 +103,7 @@ $(".btn").on("click", function(){ // Save input value upon clicking the `Save` b
     localStorage.setItem(hourSpan, JSON.stringify(userInput));
 });
 
-// Clear all calendar events when 'Clear Calendar' button is pressed
+// Clear all calendar events when 'Clear Calendar' button is clicked
 $("#clearCal").on("click", function(){
     localStorage.clear();
     init()
