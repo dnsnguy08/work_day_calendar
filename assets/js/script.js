@@ -69,6 +69,9 @@ function colorEvents() {
             updateBlock.eq(i).addClass('future-hour');
         } else if (currentHour > eventTime && currentTimeStr[1] === 'AM' && timeString[1] === 'PM') {
             updateBlock.eq(i).addClass('future-hour');
+        } else if (currentHour > eventTime && currentTimeStr[1] === 'PM' && timeString[1] === 'PM') {
+            updateBlock.eq(i).addClass('hour-passed');
+            updateBlock.eq(i).attr("placeholder", "Event has already happened");
         }
     }
 }
