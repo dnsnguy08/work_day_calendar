@@ -41,13 +41,13 @@ Create a simple calendar application that allows a user to save events for each 
 
 ### Screenshot
 
-![Work_Day_Calendar_Screenshot](./Assets/images/front_page.png)
+![Work_Day_Calendar_Screenshot](./assets/images/screenshot.jpg)
 
 
 ### Links
 
 - Solution URL: [https://github.com/dnsnguy08/work_day_calendar](https://github.com/dnsnguy08/work_day_calendar)
-- Live Site URL:
+- Live Site URL: [https://dnsnguy08.github.io/work_day_calendar/](https://dnsnguy08.github.io/work_day_calendar/)
 
 ## My process
 
